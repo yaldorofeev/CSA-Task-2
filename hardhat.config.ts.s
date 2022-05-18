@@ -1,14 +1,18 @@
-import 'dotenv/config';
-import { task } from "hardhat/config";
+import * as dotenv from "dotenv";
+
+import { HardhatUserConfig, task } from "hardhat/config";
 import "@nomiclabs/hardhat-etherscan";
 import "@nomiclabs/hardhat-waffle";
+import "@typechain/hardhat";
 import "hardhat-gas-reporter";
 import "solidity-coverage";
 
 
+dotenv.config();
+
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
-task("accounts", "Prints the list of accounts", async (args, hre) => {
+task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
   const accounts = await hre.ethers.getSigners();
 
   for (const account of accounts) {
@@ -16,51 +20,27 @@ task("accounts", "Prints the list of accounts", async (args, hre) => {
   }
 });
 
-const accounts = [{
-    privateKey: process.env.PRIVATE_KEY_OWNER,
-    balance: "100000000000000000000"
-  },
-  {
-    privateKey: process.env.PRIVATE_KEY_BAYER_1 ,
-    balance: "100000000000000000000"
-  },
-  {
-    privateKey: process.env.PRIVATE_KEY_BAYER_2,
-    balance: "100000000000000000000"
-  },
-  {
-    privateKey: process.env.PRIVATE_KEY_BAYER_3,
-    balance: "100000000000000000000"
-  }
-];
-
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
 
-/**
- * @type import('hardhat/config').HardhatUserConfig
- */
-export default {
+const config: HardhatUserConfig = {
+  // solidity: "0.5.16",
   solidity: {
-    version: "0.8.6",
-    settings: {
-      optimizer: {enabled: process.env.DEBUG ? false : true},
-    },
+    compilers: [
+        { version: "0.8.0" },
+      ],
   },
-  defaultNetwork: "hardhat",
+  // defaultNetwork: "rinkeby",
   networks: {
     rinkeby: {
       url: process.env.RINKEBY_URL,
       accounts:
         process.env.PRIVATE_KEY_OWNER !== undefined ? [process.env.PRIVATE_KEY_OWNER, process.env.PRIVATE_KEY_BAYER_1, process.env.PRIVATE_KEY_BAYER_2, process.env.PRIVATE_KEY_BAYER_3] : [],
-      gasMultiplier: 1.2
     },
     hardhat: {
-      accounts:
-        accounts,
       forking: {
               url: process.env.RINKEBY_URL || '',
-              blockNumber: 10670230
+              blockNumber: 10670230 // some block number
           },
     },
   },
@@ -77,4 +57,16 @@ export default {
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,
   },
+  // external: {
+  //   contracts: [
+  //     {
+  //       artifacts: 'node_modules/@uniswap/v2-core/build',
+  //     },
+  //     {
+  //       artifacts: 'node_modules/@uniswap/v2-periphery/build',
+  //     },
+  //   ],
+  // },
 };
+
+export default config;
