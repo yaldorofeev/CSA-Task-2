@@ -60,7 +60,7 @@ export default {
         accounts,
       forking: {
               url: process.env.RINKEBY_URL || '',
-              blockNumber: 10670230
+              blockNumber: 10685693
           },
     },
   },
