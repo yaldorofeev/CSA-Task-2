@@ -11,7 +11,19 @@ interface ISuperToken {
   function reward_procents() external view returns (uint256);
   /* function getStakerState() external view returns (uint256, Stake[] memory); */
 
+  /**
+   * @dev Moves `_amount` lp tokens from the caller's account to this contract.
+   *
+   * Emits a {StakeDone} event.
+   */
   function stake(uint256 _amount) external;
+
+  /**
+   * @dev Calculate rewards of each user's stake and transfer resulted amount
+   * of tokens to user. In each stake's timestamp for reward estimation is updated.
+   *
+   * Emits a {Claim} event.
+   */
   function claim() external;
   function claimOneStake(uint256 _stakeId) external;
   function unstake(uint256 _stakeId, uint256 _amount) external;
