@@ -7,7 +7,7 @@ task("stake", "Stake tokens")
   .addParam("amount", "The amount of tokens to mint")
   .setAction(async (args, hre) => {
   const accounts = await hre.ethers.getSigners();
-  const contract = await hre.ethers.getContractAt("SuperStaking",
+  const contract = await hre.ethers.getContractAt("ISuperStaking",
   process.env.CONTRACT_ACCAUNT!, accounts[args.requesting]);
   contract.on("StakeDone", (from, amount, event) => {
     console.log({

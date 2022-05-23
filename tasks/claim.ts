@@ -6,7 +6,7 @@ task("claim", "Claim all rewards")
   .addParam("requesting", "ID of accaunt in array in .env")
   .setAction(async (args, hre) => {
   const accounts = await hre.ethers.getSigners();
-  const contract = await hre.ethers.getContractAt("SuperStaking",
+  const contract = await hre.ethers.getContractAt("ISuperStaking",
   process.env.CONTRACT_ACCAUNT!, accounts[args.requesting]);
   contract.on("Claim", (to, amount, event) => {
     console.log({

@@ -4,12 +4,7 @@ pragma solidity ^0.8.0;
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import './ISuperStaking.sol';
 
-contract SuperStaking is ISuperToken {
-
-  /* using SafeERC20 for IERC20; */
-
-  /* SuperToken rewardTokens;
-  IUniswapV2ERC20 lPTokens; */
+contract SuperStaking is ISuperStaking {
 
   IERC20 rewardTokens;
   IERC20 lPTokens;

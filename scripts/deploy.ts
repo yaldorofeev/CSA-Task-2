@@ -14,7 +14,7 @@ async function main() {
 
   await superStaking.deployed();
 
-  console.log("superStaking deployed to:", superToken.address);
+  console.log("superStaking deployed to:", superStaking.address);
 }
 
 main().catch((error) => {

@@ -23,10 +23,13 @@ describe("Test SuperStaking contract", function () {
       ethers.constants.AddressZero,
       reward_period_minutes, lock_period_minutes, reward_procents))
       .to.be.revertedWith("Contract address can not be zero");
+    await expect(SuperStaking.deploy(process.env.UNISWAP_CONTRACT as string,
+      superTokenAddr,
+      0, lock_period_minutes, reward_procents))
+      .to.be.revertedWith("Reward period can not be zero");
   });
 
   it("Should deploy SuperStaking contract", async function () {
-
     const SuperStaking = await ethers.getContractFactory("SuperStaking");
     superStaking = await SuperStaking.deploy(process.env.UNISWAP_CONTRACT as string,
       superTokenAddr, reward_period_minutes, lock_period_minutes, reward_procents);
