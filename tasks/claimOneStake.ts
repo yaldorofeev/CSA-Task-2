@@ -4,7 +4,7 @@ import { task } from "hardhat/config";
 
 task("claimOneStake", "Claim one stake by ID")
   .addParam("requesting", "ID of accaunt in array in .env")
-  .addParam("stakeId", "The ID of stake")
+  .addParam("stakeid", "The ID of stake")
   .setAction(async (args, hre) => {
   const accounts = await hre.ethers.getSigners();
   const contract = await hre.ethers.getContractAt("ISuperStaking",
@@ -16,6 +16,6 @@ task("claimOneStake", "Claim one stake by ID")
       data: event
     });
   });
-  const tx = await contract.claimOneStake(args.stakeId);
+  const tx = await contract.claimOneStake(args.stakeid);
   tx.wait();
 });

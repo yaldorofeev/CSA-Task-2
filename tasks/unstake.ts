@@ -4,7 +4,8 @@ import { task } from "hardhat/config";
 
 task("unstake", "Unstake one stake by ID")
   .addParam("requesting", "ID of accaunt in array in .env")
-  .addParam("stakeId", "The ID of stake")
+  .addParam("stakeid", "The ID of stake")
+  .addParam("amount", "The amount of tokens to unstake")
   .setAction(async (args, hre) => {
   const accounts = await hre.ethers.getSigners();
   const contract = await hre.ethers.getContractAt("ISuperStaking",
@@ -16,6 +17,6 @@ task("unstake", "Unstake one stake by ID")
       data: event
     });
   });
-  const tx = await contract.unstake(args.stakeId);
+  const tx = await contract.unstake(args.stakeid, args.amount);
   tx.wait();
 });

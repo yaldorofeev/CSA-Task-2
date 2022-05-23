@@ -6,9 +6,9 @@ import "hardhat-gas-reporter";
 import "solidity-coverage";
 import "./tasks/stake.ts";
 import "./tasks/claim.ts";
-// import "./tasks/claimOneStake.ts";
-// import "./tasks/unstake.ts";
-// import "./tasks/getStakerState.ts";
+import "./tasks/claimOneStake.ts";
+import "./tasks/unstake.ts";
+import "./tasks/getStakerState.ts";
 
 
 // This is a sample Hardhat task. To learn how to create your own go to

@@ -4,7 +4,7 @@ import { task } from "hardhat/config";
 
 task("stake", "Stake tokens")
   .addParam("requesting", "ID of accaunt in array in .env")
-  .addParam("amount", "The amount of tokens to mint")
+  .addParam("amount", "The amount of tokens to stake")
   .setAction(async (args, hre) => {
   const accounts = await hre.ethers.getSigners();
   const contract = await hre.ethers.getContractAt("ISuperStaking",
