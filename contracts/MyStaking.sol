@@ -11,7 +11,9 @@ contract MyStaking is IMyStaking {
   IERC20 rewardTokens;
   IERC20 lPTokens;
 
+  // in second
   uint public override rewardPeriod;
+  // in second
   uint public override lockPeriod;
   uint256 public override rewardProcents;
 
