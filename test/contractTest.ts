@@ -107,15 +107,6 @@ describe("Test SuperStaking contract", function () {
     .withArgs(await accounts[2].getAddress(), ethers.BigNumber.from('1850000000'));
   });
 
-  it("Should claimOneStake with event after 20 more minutes", async function () {
-    const t_l = 60 * 20 + 1;
-    await ethers.provider.send('evm_increaseTime', [t_l]);
-    await ethers.provider.send('evm_mine', []);
-    await expect(superStaking.connect(accounts[2]).claimOneStake(0))
-    .to.emit(superStaking, "Claim")
-    .withArgs(await accounts[2].getAddress(), ethers.BigNumber.from('700000000'));
-  });
-
   it("Should revert unstake with invalid id of stake", async function () {
     await expect(superStaking.connect(accounts[2])
     .unstake(3, ethers.BigNumber.from('7000000000')))
